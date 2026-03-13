@@ -4,7 +4,7 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + '/orders')
+    fetch('https://ca-ricvera-dev-backend.greenbush-9511773a.westus2.azurecontainerapps.io/orders')
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(console.error);
