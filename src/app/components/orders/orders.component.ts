@@ -1,4 +1,3 @@
-// src/app/components/orders/orders.component.ts
 import { Component, OnInit } from '@angular/core';
 import { OrdersService, Order } from '../../services/orders.service';
 
@@ -17,6 +16,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.ordersService.getOrders().subscribe({
       next: (data) => {
+        console.log('Órdenes recibidas:', data); // útil para debugging
         this.orders = data;
         this.loading = false;
       },

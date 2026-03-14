@@ -1,6 +1,5 @@
-<!-- src/app/components/orders/orders.component.html -->
-<div *ngIf="loading">Cargando órdenes...</div>
-<div *ngIf="error">{{ error }}</div>
+<div *ngIf="loading" class="loading">Cargando órdenes...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
 
 <ul *ngIf="!loading && !error">
   <li *ngFor="let order of orders">

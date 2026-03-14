@@ -1,6 +1,5 @@
-/* Estilos básicos para la lista de órdenes */
 ul {
-  list-style-type: none;  /* quitar viñetas */
+  list-style-type: none;
   padding: 0;
 }
 
@@ -14,7 +13,7 @@ li {
 }
 
 li:nth-child(even) {
-  background-color: #f1f1f1; /* filas alternas */
+  background-color: #f1f1f1;
 }
 
 .loading {
