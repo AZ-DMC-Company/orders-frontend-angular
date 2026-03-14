@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface Order {
   id: number;
-  name: string;
+  item: string;
   price: number;
 }
 
