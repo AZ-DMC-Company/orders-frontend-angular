@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // Cambia la URL al backend Container App cuando despliegues en Azure
     this.http.get<Order[]>('http://localhost:8080/orders')
       .subscribe(data => this.orders = data);
   }
