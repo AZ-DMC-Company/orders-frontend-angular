@@ -2,16 +2,14 @@
 FROM node:18-alpine AS build
 WORKDIR /app
 
-# Copiar solo package.json y package-lock.json primero para aprovechar cache
+# Copiar package.json primero para cache de dependencias
 COPY package*.json ./
-
-# Instalar dependencias incluyendo devDependencies
 RUN npm install --legacy-peer-deps
 
-# Copiar el resto del proyecto
+# Copiar resto del proyecto
 COPY . .
 
-# Ejecutar build
+# Ejecutar build usando la configuración "production"
 RUN npm run build
 
 # Stage 2: Serve with Nginx
