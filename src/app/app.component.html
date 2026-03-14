@@ -1,0 +1,13 @@
+<h1>Listado de Órdenes</h1>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Item</th>
+    <th>Precio</th>
+  </tr>
+  <tr *ngFor="let order of orders">
+    <td>{{order.id}}</td>
+    <td>{{order.item}}</td>
+    <td>{{order.price}}</td>
+  </tr>
+</table>
