@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JsonPipe } from '@angular/common'; // <-- importar JsonPipe
-import { ConfigService } from './config.service';
+import { ConfigService } from '../core/services/config.service';
 
 @Component({
   selector: 'app-cors-test',
