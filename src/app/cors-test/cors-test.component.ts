@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { JsonPipe } from '@angular/common'; // <-- importar JsonPipe
 
 @Component({
   selector: 'app-cors-test',
@@ -8,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
     <button (click)="testCors()">Test Login POST</button>
     <pre>{{ result | json }}</pre>
   `,
-  standalone: true,               // <-- muy importante
-  imports: []
+  standalone: true,
+  imports: [JsonPipe] // <-- agregar JsonPipe aquí
 })
 export class CorsTestComponent {
   private http = inject(HttpClient);
@@ -17,14 +18,17 @@ export class CorsTestComponent {
 
   testCors() {
     const body = { username: 'testuser', password: 'testpass' };
-    this.http.post('https://orders-backend-dev-01.yellowmeadow-33984d9c.westus2.azurecontainerapps.io/login', body, { observe: 'response' })
-      .subscribe({
-        next: res => this.result = {
-          status: res.status,
-          headers: res.headers.keys().reduce((acc, key) => ({ ...acc, [key]: res.headers.get(key) }), {}),
-          body: res.body
-        },
-        error: err => this.result = err
-      });
+    this.http.post(
+      'https://orders-backend-dev-01.yellowmeadow-33984d9c.westus2.azurecontainerapps.io/login',
+      body,
+      { observe: 'response' }
+    ).subscribe({
+      next: res => this.result = {
+        status: res.status,
+        headers: res.headers.keys().reduce((acc, key) => ({ ...acc, [key]: res.headers.get(key) }), {}),
+        body: res.body
+      },
+      error: err => this.result = err
+    });
   }
-} 
+}
