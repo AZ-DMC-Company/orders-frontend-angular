@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { JsonPipe } from '@angular/common'; // <-- importar JsonPipe
+import { JsonPipe } from '@angular/common';
 import { ConfigService } from '../core/services/config.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ConfigService } from '../core/services/config.service';
     <pre>{{ result | json }}</pre>
   `,
   standalone: true,
-  imports: [JsonPipe] // <-- agregar JsonPipe aquí
+  imports: [JsonPipe]
 })
 export class CorsTestComponent {
   private http = inject(HttpClient);
@@ -20,13 +20,16 @@ export class CorsTestComponent {
 
   testCors() {
     const body = { username: 'rvera', password: '12345678' };
-    const url = `${this.configService.apiUrl}/login`;
 
-    this.http.post(
-      url,
-      body,
-      { observe: 'response' }
-    ).subscribe({
+    // Asegurarse de que el URL tenga https://
+    let baseUrl = this.configService.apiUrl;
+    if (!baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
+      baseUrl = 'https://' + baseUrl;
+    }
+
+    const url = `${baseUrl}/login`;
+
+    this.http.post(url, body, { observe: 'response' }).subscribe({
       next: res => this.result = {
         status: res.status,
         headers: res.headers.keys().reduce((acc, key) => ({ ...acc, [key]: res.headers.get(key) }), {}),
